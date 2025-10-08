@@ -1,0 +1,22 @@
+/* Footer overall styling */
+footer {
+  background-color: #0f7e19;  /* light grey background */
+  color: #be3f3f;               /* dark text color */
+  padding: 1rem 0;
+  font-size: 0.95rem;
+  border-top: 1px solid #2aca4d;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+/* Container inside footer */
+footer .container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Center text */
+footer .text-center {
+  text-align: center;
+}
