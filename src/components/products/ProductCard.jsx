@@ -83,7 +83,7 @@ const ProductCard = ({
             // Dynamic Bootstrap classes: 'card' base, 'h-100' for full height, 'shadow-sm' for light shadow.
             // 'position-relative' is needed for absolute positioning of the badge/quick look.
             // Conditional class: applies a 'border-primary' if the card is featured.
-            className={`card h-100 shadow-sm position-relative ${isFeatured ? "border-primary" : ""}`}
+            className={`card-h10 shadow-sm position-relative ${isFeatured ? "border-primary" : ""}`}
             // Event handler: sets 'isHovered' state to true when the mouse enters.
             onMouseEnter={() => setIsHovered(true)}
             // Event handler: sets 'isHovered' state to false when the mouse leaves.
@@ -128,7 +128,7 @@ const ProductCard = ({
                     // Sets the source URL determined by the logic above.
                     src={imageUrl}
                     // Bootstrap class for card image at the top.
-                    className="card-img-top object-fit-cover"
+                    className="card-img-top object-fit-cover "
                     // Alt text for accessibility.
                     alt={product.name}
                 />

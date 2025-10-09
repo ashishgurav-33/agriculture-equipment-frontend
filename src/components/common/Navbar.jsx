@@ -101,7 +101,7 @@ const Navbar = () => {
       <div className="container-fluid">
         {/* Brand/Logo → navigates to home page ("/Home"). */}
         <Link className="navbar-brand fw-bold brand-link text-font" to="/Home">
-        kissan
+        kisan
         </Link>
         {/* Button for mobile toggle (hamburger menu).
             Appears only on smaller screens. */}
@@ -186,7 +186,7 @@ const Navbar = () => {
                       {/* Profile link */}
                       <Link
                         className="dropdown-item dropdown-item-pro text-font"
-                        to="/profile-update/:id"
+                        to="/profile-update/"
                       >
                         Profile
                       </Link>

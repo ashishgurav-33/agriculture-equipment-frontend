@@ -48,7 +48,7 @@ import ProfilePage from './pages/ProfilePage'
                   <Route path="/orders" element={
                     <PrivateRoute><OrderPage/></PrivateRoute>
                   }/>
-                  <Route path="/profile-update/:id" element={<PrivateRoute><ProfilePage/></PrivateRoute>}/>
+                  <Route path="/profile-update/" element={<PrivateRoute><ProfilePage/></PrivateRoute>}/>
 
               </Routes>
 

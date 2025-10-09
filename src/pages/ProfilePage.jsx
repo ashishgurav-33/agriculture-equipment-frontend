@@ -6,145 +6,146 @@ import "../styles/ProfilePage.css";
 const ProfilePage = () => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
-
+  const [name, setName] = useState(currentUser?.name || "");
+  const [email, setEmail] = useState(currentUser?.email || "");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
 
-  // 🧾 Fetch profile when page loads
+  // 🧾 Fetch profile on mount
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         if (!currentUser?.token) {
-          setError("User not logged in.");
+          setError("⚠️ Please log in first.");
           return;
         }
 
-        const response = await userService.getProfile(currentUser.token);
+        const response = await userService.getProfile(currentUser.token, currentUser.id);
 
-        if (response.success && response.profile) {
-          setFormData({
-            name: response.profile.name || "",
-            email: response.profile.email || "",
-          });
+        if (response?.success && response?.profile) {
+          setName(response.profile.name || "");
+          setEmail(response.profile.email || "");
         } else {
           setError("Failed to load profile.");
         }
       } catch (err) {
-        console.error("Error fetching profile:", err);
-        setError("Failed to fetch profile.");
+        console.error("❌ Error fetching profile:", err);
+        setError(err.response?.data?.message || "Server error.");
       }
     };
 
     fetchProfile();
   }, [currentUser]);
 
-  // 🧑‍💻 Handle change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // 🧾 Handle profile update
-  const handleSubmit = async (e) => {
+  // 💾 Update name
+  const handleNameUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
     setError("");
 
     try {
-      if (!currentUser?.token) {
-        setError("User token missing. Please log in again.");
-        setLoading(false);
-        return;
-      }
+      const response = await userService.updateProfile({ name }, currentUser.token);
 
-      const response = await userService.updateProfile(formData, currentUser.token);
-
-      if (response.success) {
-        setMessage("✅ Profile updated successfully!");
-        setCurrentUser((prev) => ({
-          ...prev,
-          name: formData.name,
-          email: formData.email,
-        }));
+      if (response?.success) {
+        setMessage("✅ Name updated successfully!");
+        setCurrentUser((prev) => ({ ...prev, name: response.profile.name }));
       } else {
-        setError(response.message || "Failed to update profile.");
+        setError(response?.message || "Failed to update name.");
       }
     } catch (err) {
-      console.error("Profile update failed:", err);
-      setError(err.response?.data?.message || "Server error while updating profile.");
+      console.error("❌ Error updating name:", err);
+      setError(err.response?.data?.message || "Server error.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 💾 Update email
+  const handleEmailSave = async () => {
+    if (!email) {
+      setError("Email cannot be empty.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+    setError("");
+
+    try {
+      const response = await userService.updateProfile({ email }, currentUser.token);
+
+      if (response?.success) {
+        setMessage("✅ Email updated successfully!");
+        setCurrentUser((prev) => ({ ...prev, email: response.profile.email }));
+        setIsEditingEmail(false);
+      } else {
+        setError(response?.message || "Failed to update email.");
+      }
+    } catch (err) {
+      console.error("❌ Error updating email:", err);
+      setError(err.response?.data?.message || "Server error.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="profile-page">
-      <div className="container mt-4">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div className="card shadow-lg profile-form-card">
-              <div className="card-body">
-                <h2 className="card-title text-center mb-4 profile-form-title">
-                  My Profile 🧑‍💻
-                </h2>
+    <div className="profile-page d-flex justify-content-center align-items-center min-vh-100 bg-light">
+      <div className="card shadow-lg p-4 profile-card" style={{ maxWidth: "500px", width: "100%" }}>
+        <h2 className="text-center mb-4 text-success fw-bold">My Profile 🧑‍💻</h2>
 
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-3">
-                    <label htmlFor="name" className="form-label">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="form-control"
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-                  </div>
+        {error && <div className="alert alert-danger text-center">{error}</div>}
+        {message && <div className="alert alert-success text-center">{message}</div>}
 
-                  <div className="mb-3">
-                    <label htmlFor="email" className="form-label">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="form-control"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+        {/* Full Name Form */}
+        <form onSubmit={handleNameUpdate}>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label fw-semibold">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              className="form-control"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter full name"
+            />
+          </div>
+          <button type="submit" className="btn btn-success w-100 mb-4" disabled={loading}>
+            {loading ? "⏳ Saving..." : "Save Name"}
+          </button>
+        </form>
 
-                  <button
-                    type="submit"
-                    className="btn btn-primary w-100"
-                    disabled={loading}
-                  >
-                    {loading ? "Updating..." : "Save Changes"}
-                  </button>
-                </form>
-
-                {message && (
-                  <div className="alert alert-success text-center mt-3">{message}</div>
-                )}
-                {error && (
-                  <div className="alert alert-danger text-center mt-3">{error}</div>
-                )}
+        {/* Email Display / Edit */}
+        <div>
+          <label className="form-label fw-semibold">Email Address</label>
+          {!isEditingEmail ? (
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <span className="fs-5">{email}</span>
+              <button className="btn btn-outline-primary btn-sm" onClick={() => setIsEditingEmail(true)}>
+                Edit
+              </button>
+            </div>
+          ) : (
+            <div className="mb-3">
+              <input
+                type="email"
+                className="form-control mb-2"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <div className="d-flex justify-content-between">
+                <button className="btn btn-secondary" onClick={() => { setIsEditingEmail(false); setEmail(currentUser.email); }} disabled={loading}>
+                  Cancel
+                </button>
+                <button className="btn btn-success" onClick={handleEmailSave} disabled={loading}>
+                  {loading ? "⏳ Saving..." : "Save"}
+                </button>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

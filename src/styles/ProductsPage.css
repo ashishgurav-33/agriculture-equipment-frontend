@@ -1,41 +1,64 @@
 /* 🌿 Global Body */
 body {
-  background-color: #f0f4f8; /* soft farm/light gray background */
+  background-color: #f3f6f2; /* Fresh farm tone */
   font-family: 'Poppins', sans-serif;
   color: #333;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 /* 🌾 Hero Section */
 .hero-section {
-  background: linear-gradient(135deg, #84c441 0%, #3a8f1f 100%);
-  padding: 6rem 0 5rem 0;
+  background: linear-gradient(135deg, #7ac74f 0%, #2e8b57 100%);
+  padding: 7rem 1rem 5rem 1rem;
   text-align: center;
-  color: white;
+  color: #fff;
   position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
+  background: url("https://img.freepik.com/free-photo/agriculture-field-with-tractor_181624-18054.jpg") center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.hero-section * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-section h1 {
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .hero-section p {
   font-size: 1.2rem;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 /* 🔍 Search Bar */
 .search-bar {
   max-width: 600px;
   margin: 2rem auto 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .search-bar .input-group-text {
   background-color: white;
   border-right: none;
-  color: #3a8f1f;
+  color: #2e8b57;
   border-radius: 50px 0 0 50px;
 }
 
@@ -46,29 +69,30 @@ body {
 }
 
 .search-bar .form-control:focus {
-  border-color: #3a8f1f;
-  box-shadow: 0 0 8px rgba(58, 143, 31, 0.3);
+  border-color: #2e8b57;
+  box-shadow: 0 0 8px rgba(46, 139, 87, 0.4);
 }
 
 /* 🛒 Product Card */
 .product-card {
   border: none;
-  border-radius: 15px;
+  border-radius: 18px;
   overflow: hidden;
   background: #fff;
   transition: all 0.4s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
 .product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
 }
 
 .product-card-img-container {
-  height: 220px;
+  height: 250px;
   overflow: hidden;
+  border-bottom: 3px solid #7ac74f;
 }
 
 .product-card-img-container img {
@@ -89,63 +113,66 @@ body {
 }
 
 .card-title {
-  font-weight: 600;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #2e8b57;
+  margin-bottom: 0.6rem;
 }
 
 .card-text {
-  color: #666;
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .text-primary {
-  color: #3a8f1f !important;
+  color: #2e8b57 !important;
   font-weight: 600;
 }
 
 /* 🟢 Buttons */
 .btn-add-to-cart {
-  background: linear-gradient(90deg, #84c441, #3a8f1f);
+  background: linear-gradient(90deg, #7ac74f, #2e8b57);
   border: none;
   color: white;
   border-radius: 50px;
-  padding: 0.5rem 1.5rem;
+  padding: 0.6rem 1.6rem;
   transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .btn-add-to-cart:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(58, 143, 31, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(46, 139, 87, 0.3);
 }
 
 .btn-view-details {
   background-color: #fff;
-  border: 1px solid #3a8f1f;
+  border: 2px solid #2e8b57;
   border-radius: 50px;
-  padding: 0.5rem 1.5rem;
-  color: #3a8f1f;
+  padding: 0.6rem 1.6rem;
+  color: #2e8b57;
   transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .btn-view-details:hover {
-  background-color: #3a8f1f;
+  background-color: #2e8b57;
   color: #fff;
 }
 
 /* ✅ Toast Notifications */
 .custom-toast-message {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 25px;
+  right: 25px;
   min-width: 250px;
-  padding: 15px 20px;
+  padding: 16px 22px;
   border-radius: 12px;
   color: #fff;
   z-index: 1050;
   animation: slideInUp 0.5s ease-out;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
 }
 .custom-toast-message.success {
   background-color: #28a745;
@@ -161,7 +188,7 @@ body {
 /* 📱 Responsive */
 @media (max-width: 768px) {
   .hero-section h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   .hero-section p {
     font-size: 1rem;
