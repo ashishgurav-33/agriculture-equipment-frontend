@@ -127,6 +127,7 @@ export const AuthProvider = ({ children }) => {
   // The value object contains the state and functions we want to expose.
   const authProvidervalue = {
     currentUser,
+    setCurrentUser,
     loginAuth,
      logoutAuth,
     registerAuth,

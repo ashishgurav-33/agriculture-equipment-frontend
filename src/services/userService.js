@@ -4,12 +4,13 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const API_URL = `${API_BASE_URL}/users`;
 
 const userService = {
-  async getProfile(token, userId) {
-    const response = await axios.get(`${API_URL}/profile/`, {
+  async getProfile(token) {
+    const response = await axios.get(`${API_URL}/profile`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log("Response from userServie",response);
     return response.data;
   },
 

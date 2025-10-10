@@ -13,28 +13,36 @@ const ProfilePage = () => {
   const [error, setError] = useState("");
   const [isEditingEmail, setIsEditingEmail] = useState(false);
 
+  console.log("Current User", currentUser);
   // 🧾 Fetch profile on mount
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        if (!currentUser?.token) {
-          setError("⚠️ Please log in first.");
-          return;
-        }
 
-        const response = await userService.getProfile(currentUser.token, currentUser.id);
 
-        if (response?.success && response?.profile) {
-          setName(response.profile.name || "");
-          setEmail(response.profile.email || "");
-        } else {
-          setError("Failed to load profile.");
-        }
-      } catch (err) {
-        console.error("❌ Error fetching profile:", err);
-        setError(err.response?.data?.message || "Server error.");
+  const fetchProfile = async () => {
+    if (!currentUser || !currentUser.token) {
+      setLoading(false);
+      return;
+    }
+    try {
+
+      setLoading(true);
+      const response = await userService.getProfile(currentUser.token);
+
+
+      if (response?.success && response?.profile) {
+        setName(response.profile.name || "");
+        setEmail(response.profile.email || "");
+      } else {
+        setError("Failed to load profile.");
       }
-    };
+    } catch (err) {
+      console.error("❌ Error fetching profile:", err);
+      setError(err.response?.data?.message || "Server error.");
+    }finally{
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
 
     fetchProfile();
   }, [currentUser]);

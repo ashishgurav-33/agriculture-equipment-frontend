@@ -131,6 +131,7 @@ const updaprofile= async (updateemail, token) => {
             };
             // `axios.put()` sends an HTTP PUT request, typically used to update a resource.
             const response = await axios.put(`${API_URL}/profile-update/`, updateemail, config);
+            console.log("Response from", response);
             return response.data;
         } catch (error) {
             console.error("Error updating email:", error);
