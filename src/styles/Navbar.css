@@ -19,20 +19,16 @@
     transform: scale(1);
   }
 }
-/* --- Navbar Base Styles (Modernized) --- */
+
+/* --- Navbar Base Styles --- */
 .navbar-dark-pro {
-  /* position: relative; */
-  /* background: #CBAACB  ; */
-  /* background: #F3C6C0  ; */
-  /* background: #F496F4  ; */
-  /* background: #5D2FB2  ; */
-  background: #e6c71a;
+  background: #4CAF50; /* NEW: Green agriculture theme */
   backdrop-filter: blur(8px);
   padding: 0.50rem 0;
   animation: fadeInDown 0.8s ease-out forwards;
   z-index: 1030;
-  /* Keep this high so it's on top of other content */
 }
+
 /* The interactive glow effect */
 .navbar-glow {
   position: absolute;
@@ -40,23 +36,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at var(--x, 0px) 50%, rgba(214, 128, 30, 0.863) 0%, transparent 40%);
+  background: radial-gradient(circle at var(--x, 0px) 50%, rgba(76, 175, 80, 0.6) 0%, transparent 40%);
   transition: background 0.2s ease;
   pointer-events: none;
-  /* Prevents the glow from interfering with clicks */
 }
+
 /* --- Nav Links and Icons --- */
 .nav-link-pro {
   color: #010101 !important;
   transition: color 0.3s ease, transform 0.3s ease;
   font-weight: 500;
   position: relative;
-  /* font-size: 1.5rem; */
-  /* overflow: hidden; */
   z-index: 10;
 }
 .nav-link-pro:hover {
-  color: #fff !important;
+  color: #e8f5e9 !important; /* NEW */
   transform: translateY(-2px);
 }
 .nav-link-pro::after {
@@ -66,7 +60,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #2575FC;
+  background-color: #81C784; /* NEW underline */
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-out;
@@ -80,20 +74,21 @@
 }
 .nav-link-pro:hover .icon-pro {
   transform: scale(1.2);
-  color: #fff;
+  color: #e8f5e9;
   animation: pulse 0.5s ease;
 }
+
 /* --- Brand Link --- */
 .navbar-brand.brand-link {
-  /* color: #A011A0; */
-  color: #4A154B;
+  color: #2e7d32; /* NEW deep green */
   font-size: 2.25rem;
   transition: text-shadow 0.3s ease;
   z-index: 10;
 }
 .navbar-brand.brand-link:hover {
-  text-shadow: 0 0 10px #F2E03F, 0 0 20px #F5E133;
+  text-shadow: 0 0 10px #A5D6A7, 0 0 20px #C8E6C9;
 }
+
 /* --- Buttons (Interactive) --- */
 .nav-btn-pro {
   transition: all 0.3s ease;
@@ -107,19 +102,31 @@
   background-color: #fff !important;
   color: #141414 !important;
 }
+
 /* --- Dropdown Menu (Animated) --- */
 .dropdown-menu-pro {
-  background: rgba(30, 30, 30, 0.9);
+  background: rgba(46, 125, 50, 0.95); /* NEW dark green */
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   animation: fadeInDown 0.4s ease-out;
 }
 .dropdown-item-pro {
-  color: #B0B0B0 !important;
+  color: #C8E6C9 !important; /* soft light green */
   transition: all 0.2s ease;
 }
 .dropdown-item-pro:hover {
-  background-color: rgba(60, 60, 60, 0.7) !important;
-  color: #fff !important;
+  background-color: rgba(27, 94, 32, 0.7) !important;
+  color: #ffffff !important;
   transform: translateX(5px);
+}
+
+/* --- Responsive Tweaks --- */
+@media (max-width: 991.98px) {
+  .nav-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-menu-pro {
+    position: absolute !important;
+  }
 }

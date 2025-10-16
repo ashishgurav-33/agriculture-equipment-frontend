@@ -1,22 +1,54 @@
-/* Footer overall styling */
-footer {
-  background-color: #0f7e19;  /* light grey background */
-  color: #be3f3f;               /* dark text color */
-  padding: 1rem 0;
-  font-size: 0.95rem;
-  border-top: 1px solid #2aca4d;
-  width: 100%;
-  position: relative;
-  bottom: 0;
+/* ========================
+   Kissan Footer Styles
+   ======================== */
+
+.footer-bg {
+  background-color: #f1f8e9; /* Light green */
+  color: #2e7d32;
+  border-top: 2px solid #c8e6c9;
+  padding-top: 1rem;
 }
 
-/* Container inside footer */
-footer .container {
-  max-width: 1200px;
-  margin: auto;
+/* Tagline */
+.footer-tagline {
+  font-size: 1.1rem;
+  color: #388e3c;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
-/* Center text */
-footer .text-center {
-  text-align: center;
+/* Social Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.icon-link {
+  color: #2e7d32;
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.icon-link:hover {
+  color: #66bb6a;
+  transform: scale(1.2);
+}
+
+/* Copyright */
+.copyright-text {
+  font-weight: 500;
+  color: #4e4e4e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .social-icons {
+    gap: 1rem;
+  }
+
+  .footer-tagline {
+    font-size: 1rem;
+  }
 }

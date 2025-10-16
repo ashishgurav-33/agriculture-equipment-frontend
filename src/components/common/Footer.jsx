@@ -1,17 +1,49 @@
-// / src/components/common/Footer.jsx
-// This component renders a consistent footer at the bottom of every page.
-import React from 'react';
-import '../../styles/Footer.css'; // 👈 CSS import added
+// src/components/common/Footer.jsx
 
-// Why a footer is important:
-// A footer provides a professional and consistent look across all pages of your application.
-// It's a standard practice for web development.
+import React from 'react';
+import { FaInstagram, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
+import '../../styles/Footer.css'; // Import CSS
+
 const Footer = () => {
   return (
-    <footer className="bg-light text-center text-lg-start mt-auto">
+    <footer className="footer-bg text-center text-lg-start mt-auto">
       <div className="container p-4">
-        <div className="text-center p-3">
-          &copy; {new Date().getFullYear()} E-commerce App
+        {/* Tagline */}
+        <div className="footer-tagline text-center" >
+          Thank you for visiting <strong>Kissan</strong> 
+        </div>
+
+        {/* Social Media Icons */}
+        <div className="mb-3 social-icons">
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon-link"
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href="https://wa.me/1234567890"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon-link"
+          >
+            <FaWhatsapp />
+          </a>
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon-link"
+          >
+            <FaFacebookF />
+          </a>
+        </div>
+
+        {/* Copyright */}
+        <div className="text-center p-3 copyright-text">
+          &copy; {new Date().getFullYear()} Kissan E-commerce App
         </div>
       </div>
     </footer>
